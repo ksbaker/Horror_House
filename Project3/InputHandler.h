@@ -25,6 +25,7 @@ protected:
 	OIS::InputManager* mInputManager;
 	Ogre::RenderWindow *mRenderWindow;
 	OIS::Keyboard *mPreviousKeyboard;
+	OIS::Mouse *mMouse;
 	OIS::Keyboard *mCurrentKeyboard;
 	char mOldKeys[256];
 

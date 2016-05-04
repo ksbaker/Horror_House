@@ -24,7 +24,7 @@ public:
 	void addCamera(GhostCamera *c) { mCamera = c; }
 
 	Ogre::SceneManager *SceneManager() { return mSceneManager; }
-
+	Ogre::SceneNode *flashLight;
 
 protected:
 
