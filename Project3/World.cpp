@@ -18,6 +18,7 @@
 // Other input files for my project
 #include "Camera.h"
 #include "InputHandler.h"
+#include "MainMenu.h"
 
 World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneManager(sceneManager), mInputHandler(input)
 {
@@ -56,11 +57,8 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneMa
 	wWall->attachObject(WestWall);
 	wWall->setPosition(0,0,0);
 
-	// Now we will show the sample overlay.  Look in the file Content/Overlays/Example to
-	// see how this overlay is defined
-	Ogre::OverlayManager& om = Ogre::OverlayManager::getSingleton();
-	Ogre::Overlay *overly = om.getByName("Sample");
-	overly->show();
+	mMainMenu = new MainMenu();
+	mMainMenu->displayMenu();
 }
 
 void 
@@ -72,6 +70,15 @@ World::Think(float time)
 	if (mInputHandler->IsKeyDown(OIS::KC_RIGHT))
 	{
 		mCamera->yaw(Ogre::Degree(3 * time));
+	}
+
+	if (mInputHandler->IsKeyDown(OIS::KC_DOWN) || mInputHandler->IsKeyDown(OIS::KC_UP))
+	{
+		mMainMenu->changeOption();
+	}
+	else
+	{
+		mMainMenu->release();
 	}
 }
 
