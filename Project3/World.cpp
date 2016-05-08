@@ -22,7 +22,26 @@
 World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneManager(sceneManager), mInputHandler(input)
 {
 
-	mSceneManager->setAmbientLight(Ogre::ColourValue(1,1,1));
+	mSceneManager->setAmbientLight(Ogre::ColourValue(0.001,0.001,0.001));
+    mSceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+
+
+	
+	Ogre::Light *spot = mSceneManager->createLight("Flashlight");
+    spot->setType(Ogre::Light::LT_SPOTLIGHT);
+    spot->setDiffuseColour(1.0, 1.0, 1.0);
+	spot->setSpecularColour(1.0, 1.0, 1.0);
+	spot->setPosition(0, 2, 200);
+	spot->setAttenuation(3250.0,1.0,0.0014,0.000007);
+	spot->setDirection((Ogre::Vector3(0.0, 0.0, 0.0) - Ogre::Vector3(0.0, 0.0, 100.0)).normalisedCopy());
+    spot->setSpotlightRange(Ogre::Degree(3),Ogre::Degree(8),0.5f);
+
+	/**
+	Ogre::SceneNode *LightNode = mSceneManager->getRootSceneNode()->createChildSceneNode("SpotLight");
+	LightNode->attachObject(SpotLight);
+	LightNode->setPosition(0,0,0);
+	**/
+
 
 	// Yeah, this should be done automatically for all fonts referenced in an overlay file.
 	//  But there is a bug in the OGRE code so we need to do it manually.
@@ -38,6 +57,13 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneMa
 	Ogre::Entity *SouthWall = SceneManager()->createEntity("SouthWall.mesh");
 	Ogre::Entity *WestWall = SceneManager()->createEntity("WestWall.mesh");
 	Ogre::Entity *Flashlight = SceneManager()->createEntity("Flashlight.mesh");
+
+	/**
+	NorthWall->setCastShadows(false);
+	EastWall->setCastShadows(false);
+	SouthWall->setCastShadows(false);
+	WestWall->setCastShadows(false);
+	**/
 
 	Ogre::SceneNode *nWall = SceneManager()->getRootSceneNode()->createChildSceneNode();
 	nWall->attachObject(NorthWall);
@@ -61,8 +87,11 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneMa
 
 	flashLight = SceneManager()->getRootSceneNode()->createChildSceneNode();
 	flashLight->attachObject(Flashlight);
-	flashLight->setPosition(0,0,0);
 
+	flashLight->setPosition(0,1,0);
+	flashLight->attachObject(spot);
+
+	
 	// Now we will show the sample overlay.  Look in the file Content/Overlays/Example to
 	// see how this overlay is defined
 	Ogre::OverlayManager& om = Ogre::OverlayManager::getSingleton();
@@ -80,6 +109,7 @@ World::Think(float time)
 	if (mInputHandler->IsKeyDown(OIS::KC_RIGHT))
 	{
 		flashLight->yaw(Ogre::Radian(-time * 1));
+
 	}
 
 	if (mInputHandler->IsKeyDown(OIS::KC_LEFT))

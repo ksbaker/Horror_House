@@ -28,7 +28,7 @@ bool
     //   Feel free to change this to something that makes more sense to you.
 	mInputHandler->Think(time);
 	mWorld->Think(time);
-    mGhostCamera->Think(time);
+	mGhostCamera->Think(time);
 
 	// Call think methods on any other managers / etc you want to add
 

@@ -25,6 +25,8 @@ public:
 
 	Ogre::SceneManager *SceneManager() { return mSceneManager; }
 	Ogre::SceneNode *flashLight;
+	Ogre::SceneNode *nWall;
+	Ogre::SceneNode *LightNode;
 
 protected:
 
