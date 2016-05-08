@@ -23,6 +23,9 @@ public:
     // You'll want various methods to access & change your world here
     void Think(float time);
 	void addCamera(GhostCamera *c) { mCamera = c; }
+	bool getKeepGoing() {return keepGoing; }
+	void restartGame();
+	void exitGame(){ keepGoing = false; }
 
 	Ogre::SceneManager *SceneManager() { return mSceneManager; }
 
@@ -39,6 +42,10 @@ protected:
 	// Here is where you keep all your world data.
 	//  You probably want to use containers (arrays / lists / classes / etc) to ogranize them, 
 	//    instead of a whole list of variables.  
+
+private:
+	
+	bool keepGoing;
 
 };
 

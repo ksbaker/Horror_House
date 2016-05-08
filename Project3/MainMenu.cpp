@@ -5,9 +5,10 @@
 #include "OgreOverlayContainer.h"
 #include "OgreTextAreaOverlayElement.h"
 
+#include "World.h"
 #include "InputHandler.h"
 
-MainMenu::MainMenu(InputHandler *input) : mInputHandler(input)
+MainMenu::MainMenu(World *world, InputHandler *input) : mWorld(world), mInputHandler(input)
 {
 	Ogre::OverlayManager& om = Ogre::OverlayManager::getSingleton();
 	mOverlay = om.getByName("GameTitle");
@@ -20,11 +21,11 @@ MainMenu::MainMenu(InputHandler *input) : mInputHandler(input)
 	Ogre::TextAreaOverlayElement *te = (Ogre::TextAreaOverlayElement *) om.getOverlayElement("PlayButton/Panel/Text1");
 	te->setCaption("> PLAY <");
 
-	Ogre::TextAreaOverlayElement *te = (Ogre::TextAreaOverlayElement *) om.getOverlayElement("PlayButton/Panel/Text1");
-	te->setCaption("  RESTART  ");
+	Ogre::TextAreaOverlayElement *te2 = (Ogre::TextAreaOverlayElement *) om.getOverlayElement("RestartButton/Panel/Text1");
+	te2->setCaption("  RESTART  ");
 
-	Ogre::TextAreaOverlayElement *te2 = (Ogre::TextAreaOverlayElement *) om.getOverlayElement("ExitButton/Panel/Text1");
-	te2->setCaption("  EXIT  ");
+	Ogre::TextAreaOverlayElement *te3 = (Ogre::TextAreaOverlayElement *) om.getOverlayElement("ExitButton/Panel/Text1");
+	te3->setCaption("  EXIT  ");
 }
 
 void MainMenu::Think(float time)
@@ -49,6 +50,15 @@ void MainMenu::Think(float time)
 			if (optionSelected == 0)
 			{
 				hideMenu();
+				inMenu = false;
+			}
+			else if (optionSelected == 1)
+			{
+				mWorld->restartGame();
+			}
+			else if (optionSelected == 2)
+			{
+				mWorld->exitGame();
 			}
 		}
 	}
@@ -66,6 +76,7 @@ void MainMenu::displayMenu()
 {
 	mOverlay->show();
 	mPlayButtonOverlay->show();
+	mRestartButtonOverlay ->show();
 	mExitButtonOverlay->show();
 }
 
@@ -73,6 +84,7 @@ void MainMenu::hideMenu()
 {
 	mOverlay->hide();
 	mPlayButtonOverlay->hide();
+	mRestartButtonOverlay->hide();
 	mExitButtonOverlay->hide();
 }
 
@@ -82,7 +94,7 @@ void MainMenu::changeOption(int difference)
 	{
 		released = false;
 
-		if (optionSelected >= 0 && optionSelected <= 3)
+		if (optionSelected + difference >= 0 && optionSelected + difference <= 2)
 		{
 			optionSelected += difference;
 
@@ -97,7 +109,7 @@ void MainMenu::changeOption(int difference)
 				te2->setCaption("  RESTART  ");
 				te3->setCaption("  EXIT  ");
 			}
-			else if (optionSelected == 2)
+			else if (optionSelected == 1)
 			{
 				te->setCaption("  PLAY  ");
 				te2->setCaption("> RESTART <");
@@ -107,7 +119,7 @@ void MainMenu::changeOption(int difference)
 			{
 				te->setCaption("  PLAY  ");
 				te2->setCaption("  RESTART  ");
-				te2->setCaption("> EXIT <");
+				te3->setCaption("> EXIT <");
 			}
 		}
 	}

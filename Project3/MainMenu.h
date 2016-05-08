@@ -6,12 +6,13 @@ namespace Ogre
 	class Overlay;
 }
 
+class World;
 class InputHandler;
 
 class MainMenu 
 {
 public:
-	MainMenu(InputHandler *input);
+	MainMenu(World *world, InputHandler *input);
 	
 	void Think(float time);
 	void displayMenu();
@@ -21,6 +22,7 @@ public:
 	void release();
 
 private:
+	World *mWorld;
 	InputHandler *mInputHandler;
 
 	bool inMenu;

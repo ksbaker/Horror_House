@@ -33,8 +33,8 @@ PlayButton
     {
       metrics_mode relative
 
-      left 0.2
-      top 0.3
+      left 0.12
+      top 0.25
       width 0.1
       height 0.2
 	  
@@ -46,7 +46,7 @@ PlayButton
 		 top 0
          font_name BlueHighwayBig
          char_height 0.10
-         colour 0 0.6 1
+         colour 0 1 0.4
          caption > PLAY <
 		}
     }
@@ -56,16 +56,16 @@ RestartButton
 {
     zorder 200
 	
-    container Panel(ExitButton/Panel)
+    container Panel(RestartButton/Panel)
     {
       metrics_mode relative
 
-      left 0.2
-      top 0.5
+      left 0.12
+      top 0.35
       width 0.1
       height 0.2
 	  
-		element TextArea(ExitButton/Panel/Text1)
+		element TextArea(RestartButton/Panel/Text1)
 		{
 		metrics_mode relative
 		
@@ -73,8 +73,8 @@ RestartButton
 		 top 0
          font_name BlueHighwayBig
          char_height 0.1
-         colour 1 0.4 0
-         caption   EXIT  
+         colour 0 0.6 1
+         caption   Restart  
 		}
     }
 }
@@ -87,8 +87,8 @@ ExitButton
     {
       metrics_mode relative
 
-      left 0.2
-      top 0.7
+      left 0.12
+      top 0.45
       width 0.1
       height 0.2
 	  
