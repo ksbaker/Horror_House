@@ -72,14 +72,7 @@ World::Think(float time)
 		mCamera->yaw(Ogre::Degree(3 * time));
 	}
 
-	if (mInputHandler->IsKeyDown(OIS::KC_DOWN) || mInputHandler->IsKeyDown(OIS::KC_UP))
-	{
-		mMainMenu->changeOption();
-	}
-	else
-	{
-		mMainMenu->release();
-	}
+	mMainMenu->Think(time);
 }
 
 

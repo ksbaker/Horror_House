@@ -6,20 +6,30 @@ namespace Ogre
 	class Overlay;
 }
 
+class InputHandler;
+
 class MainMenu 
 {
 public:
-	MainMenu();
+	MainMenu(InputHandler *input);
 	
+	void Think(float time);
 	void displayMenu();
 	void hideMenu();
-	void changeOption();
+	void changeOption(int difference);
+	void selectOption();
 	void release();
 
 private:
-	bool playSelected;
+	InputHandler *mInputHandler;
+
+	bool inMenu;
 	bool released;
+
+	int optionSelected;
+
 	Ogre::Overlay *mOverlay;
+	Ogre::Overlay *mRestartButtonOverlay;
 	Ogre::Overlay *mPlayButtonOverlay;
 	Ogre::Overlay *mExitButtonOverlay;
 };
