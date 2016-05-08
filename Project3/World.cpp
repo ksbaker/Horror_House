@@ -57,8 +57,10 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneMa
 	wWall->attachObject(WestWall);
 	wWall->setPosition(0,0,0);
 
-	mMainMenu = new MainMenu();
+	mMainMenu = new MainMenu(this, mInputHandler);
 	mMainMenu->displayMenu();
+
+	keepGoing = true;
 }
 
 void 
@@ -73,6 +75,11 @@ World::Think(float time)
 	}
 
 	mMainMenu->Think(time);
+}
+
+void World::restartGame()
+{
+
 }
 
 
