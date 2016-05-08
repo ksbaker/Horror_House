@@ -22,6 +22,7 @@ public:
 	void setOrientation(Ogre::Quaternion orientation);
 	void setPosition(Ogre::Vector3 position);
 	void yaw(Ogre::Degree degree);
+	void pitch(Ogre::Degree degree);
 	void lookAt(Ogre::Vector3 point);
 
 	// If you have a different cameras, you'll want some acessor methods here.

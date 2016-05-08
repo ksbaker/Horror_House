@@ -8,7 +8,9 @@
 class World;
 class GhostCamera;
 class InputHandler;
-
+namespace OIS {
+	class Mouse;
+}
 
 class InputHandler // : public OIS::MouseListener, public OIS::KeyListener
 {
@@ -20,13 +22,16 @@ public:
 
 	bool IsKeyDown(OIS::KeyCode key);
 	bool WasKeyDown(OIS::KeyCode key);
+	OIS::Mouse *mMouse;
 
 protected:
 	OIS::InputManager* mInputManager;
 	Ogre::RenderWindow *mRenderWindow;
 	OIS::Keyboard *mPreviousKeyboard;
 	OIS::Keyboard *mCurrentKeyboard;
+	
 	char mOldKeys[256];
+
 
 };
 

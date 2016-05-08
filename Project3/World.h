@@ -1,23 +1,30 @@
 #ifndef __World_h_
 #define __World_h_
+//#include <OgreRenderWindow.h>
 
 // Forward delcarations of Ogre classes.  Note the Ogre namespace!
+
+namespace OIS {
+	class Mouse;
+}
 namespace Ogre {
     class SceneNode;
     class SceneManager;
 	class Entity;
+	class RenderWindow;
 }
 
 // Forward delcarations of our own classes
 class GhostCamera;
 class InputHandler;
+class RenderWindow;
 
 
 class World
 {
 public:
 	
-    World(Ogre::SceneManager *sceneManager, InputHandler *input);
+	World(Ogre::SceneManager *sceneManager, InputHandler *input);
 
     // You'll want various methods to access & change your world here
     void Think(float time);

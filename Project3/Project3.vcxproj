@@ -113,17 +113,21 @@ copy resources.cfg "$(OutDir)"</Command>
   <ItemGroup>
     <ClInclude Include="AIManager.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="MainListener.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Project3.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIManager.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainListener.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Project3.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>

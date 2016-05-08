@@ -48,6 +48,12 @@ GhostCamera::yaw(Ogre::Degree degree)
 }
 
 void
+GhostCamera::pitch(Ogre::Degree degree)
+{
+	mRenderCamera->pitch(degree);
+}
+
+void
 GhostCamera::setOrientation(Ogre::Quaternion orientation)
 {
 	mRenderCamera->setOrientation(orientation);

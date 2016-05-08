@@ -10,6 +10,7 @@
 #include "OgreOverlay.h"
 #include "OgreFontManager.h"
 #include "OgreTextAreaOverlayElement.h"
+#include "OgreRenderWindow.h"
 
 // IOS (Input system) header files
 
@@ -19,10 +20,10 @@
 #include "Camera.h"
 #include "InputHandler.h"
 
-World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneManager(sceneManager), mInputHandler(input)
+World::World(Ogre::SceneManager *sceneManager, InputHandler *input) : mSceneManager(sceneManager), mInputHandler(input)
 {
-
 	mSceneManager->setAmbientLight(Ogre::ColourValue(1,1,1));
+	//mInputManager = OIS::InputManager::createInputSystem((size_t)m_scMainWindow().GetWindowHandle());
 
 	// Yeah, this should be done automatically for all fonts referenced in an overlay file.
 	//  But there is a bug in the OGRE code so we need to do it manually.
@@ -31,7 +32,6 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneMa
 	{ 
 		iter.getNext()->load(); 
 	}
-
 
 	Ogre::Entity *NorthWall = SceneManager()->createEntity("NorthWall.mesh");
 	Ogre::Entity *EastWall = SceneManager()->createEntity("EastWall.mesh");
@@ -66,8 +66,14 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input)   : mSceneMa
 void 
 World::Think(float time)
 {
-	mCamera->setPosition(Ogre::Vector3(0, 0, 0));
-	mCamera->lookAt(Ogre::Vector3(1.0, 0, 500));
+	mInputHandler->mMouse->capture();
+	mCamera->setPosition(Ogre::Vector3(0, 1, -5));
+	//mCamera->lookAt(Ogre::Vector3(1.0, 0, 500));
+
+	int mx =mInputHandler->mMouse->getMouseState().X.rel;
+	int my = mInputHandler->mMouse->getMouseState().Y.rel;
+	mCamera->yaw((Ogre::Degree) mx*-10 / 30);
+	mCamera->pitch((Ogre::Degree) my*-10 / 30);
 
 	if (mInputHandler->IsKeyDown(OIS::KC_RIGHT))
 	{
