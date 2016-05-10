@@ -3,18 +3,28 @@
 #include <ois/ois.h>
 #include "Ogre.h"
 
+class World;
+class InputHandler;
+
 class Player
 {
 public:
-	Player(void);
+	Player(World *world);
 	~Player(void);
-	void Think(float time);
+	void Think(float time, InputHandler *mInputHandler);
+
+	Ogre::SceneManager *SceneManager() { return mSceneManager; }
+
+
+	Ogre::SceneNode *mTank;
+	Ogre::Entity *tankEntity;
 
 private:
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& fe);
+
+	World *mWorld;
+	
  
-	virtual bool mouseMoved(const OIS::MouseEvent& me);
- 
+	Ogre::SceneManager *mSceneManager;
 	Ogre::Real mRotate;
 	Ogre::Real mMove;
 	Ogre::SceneNode* mCamNode;

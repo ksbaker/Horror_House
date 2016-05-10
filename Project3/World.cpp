@@ -19,6 +19,7 @@
 // Other input files for my project
 #include "Camera.h"
 #include "InputHandler.h"
+#include "Player.h"
 
 World::World(Ogre::SceneManager *sceneManager, InputHandler *input) : mSceneManager(sceneManager), mInputHandler(input)
 {
@@ -58,11 +59,8 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input) : mSceneMana
 	wWall->setPosition(0,0,0);
 	wWall->scale(5,5,5);
 
-	tankEntity = SceneManager()->createEntity("Tank.mesh");
-	mTank = SceneManager()->getRootSceneNode()->createChildSceneNode();
-	mTank->attachObject(tankEntity);
-	mTank->setPosition(0, 0, 20);
-	mTank->scale(.5,.5,.5);
+	tank = new Player(this);
+
 
 	// Now we will show the sample overlay.  Look in the file Content/Overlays/Example to
 	// see how this overlay is defined
@@ -74,47 +72,10 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input) : mSceneMana
 void 
 World::Think(float time)
 {
-	const float RADIANS_PER_SECOND = 1;
-	const float SPEED = 30;
+	tank->Think(time, mInputHandler);
 
-	mInputHandler->mMouse->capture();
-
-	int mx =mInputHandler->mMouse->getMouseState().X.rel;
-	int my = mInputHandler->mMouse->getMouseState().Y.rel;
-	mTank->yaw((Ogre::Degree) mx*-10 / 30, Ogre::Node::TS_WORLD);
-
-	Ogre::Radian oldPitch = mTank->getOrientation().getPitch();
-	Ogre::Radian newPitch = Ogre::Math::Abs((Ogre::Degree)(my*-10 / 30) + oldPitch);
-
-	if(newPitch < Ogre::Radian(Ogre::Math::PI/2)) {
-		mTank->pitch((Ogre::Degree) my*-10 / 30);
-	}
-	else
-	{
-		Ogre::Radian o = oldPitch;
-		Ogre::Radian r = newPitch;
-	}
-
-	if (mInputHandler->IsKeyDown(OIS::KC_RIGHT))
-	{
-		mTank->translate(time * SPEED, 0, 0, Ogre::Node::TS_LOCAL);
-	}
-	else if (mInputHandler->IsKeyDown(OIS::KC_LEFT))
-	{
-		mTank->translate(-time * SPEED, 0, 0, Ogre::Node::TS_LOCAL);
-	}
-	if (mInputHandler->IsKeyDown(OIS::KC_UP))
-	{
-		mTank->translate(0, 0, -time * SPEED, Ogre::Node::TS_LOCAL);
-	}
-	else if (mInputHandler->IsKeyDown(OIS::KC_DOWN))
-	{
-		mTank->translate(0, 0, time * SPEED, Ogre::Node::TS_LOCAL);
-	}
-
-
-	mCamera->setPositionFromGhostPosition(mTank->getOrientation(), mTank->getPosition());
-	mCamera->setOrientationFromGhostOrientation(mTank->getOrientation());
+	mCamera->setPositionFromGhostPosition(tank->mTank->getOrientation(), tank->mTank->getPosition());
+	mCamera->setOrientationFromGhostOrientation(tank->mTank->getOrientation());
 }
 
 

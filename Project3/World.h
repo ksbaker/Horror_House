@@ -18,6 +18,7 @@ namespace Ogre {
 class GhostCamera;
 class InputHandler;
 class RenderWindow;
+class Player;
 
 
 class World
@@ -31,6 +32,7 @@ public:
 	void addCamera(GhostCamera *c) { mCamera = c; }
 
 	Ogre::SceneManager *SceneManager() { return mSceneManager; }
+	Player *tank;
 
 
 protected:
@@ -42,7 +44,6 @@ protected:
 	GhostCamera *mCamera;
 
 	Ogre::Entity *tankEntity;
-	Ogre::SceneNode *mTank;
 
 	// Here is where you keep all your world data.
 	//  You probably want to use containers (arrays / lists / classes / etc) to ogranize them, 
