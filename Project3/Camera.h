@@ -24,6 +24,8 @@ public:
 	void yaw(Ogre::Degree degree);
 	void pitch(Ogre::Degree degree);
 	void lookAt(Ogre::Vector3 point);
+	Ogre::Vector3 getUp();
+	Ogre::Vector3 getRight();
 
 	// If you have a different cameras, you'll want some acessor methods here.
     //  If your camera always stays still, you could remove this class entirely

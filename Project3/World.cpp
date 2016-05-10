@@ -41,20 +41,28 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input) : mSceneMana
 	Ogre::SceneNode *nWall = SceneManager()->getRootSceneNode()->createChildSceneNode();
 	nWall->attachObject(NorthWall);
 	nWall->setPosition(0,0,0);
-	nWall->scale(1,1,1);
+	nWall->scale(5,5,5);
 
 	Ogre::SceneNode *eWall = SceneManager()->getRootSceneNode()->createChildSceneNode();
 	eWall->attachObject(EastWall);
 	eWall->setPosition(0,0,0);
-	eWall->scale(1,1,1);
+	eWall->scale(5,5,5);
 
 	Ogre::SceneNode *sWall = SceneManager()->getRootSceneNode()->createChildSceneNode();
 	sWall->attachObject(SouthWall);
 	sWall->setPosition(0,0,0);
+	sWall->scale(5,5,5);
 
 	Ogre::SceneNode *wWall = SceneManager()->getRootSceneNode()->createChildSceneNode();
 	wWall->attachObject(WestWall);
 	wWall->setPosition(0,0,0);
+	wWall->scale(5,5,5);
+
+	tankEntity = SceneManager()->createEntity("Tank.mesh");
+	mTank = SceneManager()->getRootSceneNode()->createChildSceneNode();
+	mTank->attachObject(tankEntity);
+	mTank->setPosition(0, 0, 20);
+	mTank->scale(.5,.5,.5);
 
 	// Now we will show the sample overlay.  Look in the file Content/Overlays/Example to
 	// see how this overlay is defined
@@ -66,19 +74,47 @@ World::World(Ogre::SceneManager *sceneManager, InputHandler *input) : mSceneMana
 void 
 World::Think(float time)
 {
+	const float RADIANS_PER_SECOND = 1;
+	const float SPEED = 30;
+
 	mInputHandler->mMouse->capture();
-	mCamera->setPosition(Ogre::Vector3(0, 1, -5));
-	//mCamera->lookAt(Ogre::Vector3(1.0, 0, 500));
 
 	int mx =mInputHandler->mMouse->getMouseState().X.rel;
 	int my = mInputHandler->mMouse->getMouseState().Y.rel;
-	mCamera->yaw((Ogre::Degree) mx*-10 / 30);
-	mCamera->pitch((Ogre::Degree) my*-10 / 30);
+	mTank->yaw((Ogre::Degree) mx*-10 / 30, Ogre::Node::TS_WORLD);
+
+	Ogre::Radian oldPitch = mTank->getOrientation().getPitch();
+	Ogre::Radian newPitch = Ogre::Math::Abs((Ogre::Degree)(my*-10 / 30) + oldPitch);
+
+	if(newPitch < Ogre::Radian(Ogre::Math::PI/2)) {
+		mTank->pitch((Ogre::Degree) my*-10 / 30);
+	}
+	else
+	{
+		Ogre::Radian o = oldPitch;
+		Ogre::Radian r = newPitch;
+	}
 
 	if (mInputHandler->IsKeyDown(OIS::KC_RIGHT))
 	{
-		mCamera->yaw(Ogre::Degree(3 * time));
+		mTank->translate(time * SPEED, 0, 0, Ogre::Node::TS_LOCAL);
 	}
+	else if (mInputHandler->IsKeyDown(OIS::KC_LEFT))
+	{
+		mTank->translate(-time * SPEED, 0, 0, Ogre::Node::TS_LOCAL);
+	}
+	if (mInputHandler->IsKeyDown(OIS::KC_UP))
+	{
+		mTank->translate(0, 0, -time * SPEED, Ogre::Node::TS_LOCAL);
+	}
+	else if (mInputHandler->IsKeyDown(OIS::KC_DOWN))
+	{
+		mTank->translate(0, 0, time * SPEED, Ogre::Node::TS_LOCAL);
+	}
+
+
+	mCamera->setPositionFromGhostPosition(mTank->getOrientation(), mTank->getPosition());
+	mCamera->setOrientationFromGhostOrientation(mTank->getOrientation());
 }
 
 

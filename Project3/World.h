@@ -41,6 +41,9 @@ protected:
 	InputHandler *mInputHandler;
 	GhostCamera *mCamera;
 
+	Ogre::Entity *tankEntity;
+	Ogre::SceneNode *mTank;
+
 	// Here is where you keep all your world data.
 	//  You probably want to use containers (arrays / lists / classes / etc) to ogranize them, 
 	//    instead of a whole list of variables.  
