@@ -31,6 +31,8 @@ Player::Think(float time, InputHandler *mInputHandler)
 
 	int mx =mInputHandler->mMouse->getMouseState().X.rel;
 	int my = mInputHandler->mMouse->getMouseState().Y.rel;
+	
+	//The bigger the # you divide by, the slower the move
 	mTank->yaw((Ogre::Degree) mx*-10 / 30, Ogre::Node::TS_WORLD);
 
 	Ogre::Radian oldPitch = mTank->getOrientation().getPitch();
@@ -57,7 +59,7 @@ Player::Think(float time, InputHandler *mInputHandler)
 		mTank->translate(0, 0, time * SPEED, Ogre::Node::TS_LOCAL);
 	}
 	
-	//Fixes issue of moving up if aiming up. If ground not at 0, change y component to be whatever it is.
+	//Quick and dirty: Fixes issue of moving up if aiming up. If ground not at 0, change y component to be whatever the ground is at.
 	mTank->setPosition(mTank->getPosition().x, 0, mTank->getPosition().z);
 
 }
