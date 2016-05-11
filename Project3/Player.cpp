@@ -56,5 +56,8 @@ Player::Think(float time, InputHandler *mInputHandler)
 	{
 		mTank->translate(0, 0, time * SPEED, Ogre::Node::TS_LOCAL);
 	}
+	
+	//Fixes issue of moving up if aiming up. If ground not at 0, change y component to be whatever it is.
+	mTank->setPosition(mTank->getPosition().x, 0, mTank->getPosition().z);
 
 }

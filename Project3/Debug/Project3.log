@@ -1,4 +1,4 @@
-﻿Build started 5/10/2016 4:14:35 PM.
+﻿Build started 5/10/2016 4:55:15 PM.
      1>Project "C:\cygwin64\home\Kyle\CS420\procedural\Project3\Project3.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\VC\bin\CL.exe /c /I"C:\Users\Kyle\OgreSDK_vc11_v1-9-0/include/OGRE/Overlay" /I"C:\Users\Kyle\OgreSDK_vc11_v1-9-0/boost/" /I"C:\Users\Kyle\OgreSDK_vc11_v1-9-0/include/OIS" /I"C:\Users\Kyle\OgreSDK_vc11_v1-9-0/include/OGRE" /I"C:\Users\Kyle\OgreSDK_vc11_v1-9-0/include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
@@ -46,4 +46,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:19.72
+Time Elapsed 00:00:19.32
