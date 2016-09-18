@@ -1,31 +1,23 @@
-# README #
+Horror House:
 
-TODO:
-Explain this project in here.
+An exciting horror game FPS
 
+Flashlight pushes zombies away. Try to escape by reaching the ladder. See how far you can get!
 
-### What is this repository for? ###
+WASD to move
 
-* This is a game
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Space to sprint
 
-### How do I get set up? ###
+Mouse to look
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+F to toggle flashlight
 
-### Contribution guidelines ###
+(Many things are labeled "420 procedural" because that was the title of our class/project)
 
-* Writing tests
-* Code review
-* Other guidelines
+Should run perfectly fine in Visual Studio
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Made By:
+Kyle Baker
+Cole Howard
+Carlos Andina
+Dominic Mortlock
