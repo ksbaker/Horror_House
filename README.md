@@ -17,7 +17,11 @@ F to toggle flashlight
 Should run perfectly fine in Visual Studio
 
 Made By:
+
 Kyle Baker
+
 Cole Howard
+
 Carlos Andina
+
 Dominic Mortlock
